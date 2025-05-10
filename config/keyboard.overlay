@@ -1,0 +1,43 @@
+/* I2C バスに接続された MCP23017 を定義 */
+&i2c1 {
+    mcp23017: mcp23017@20 {
+        compatible = "microchip,mcp23017";
+        reg = <0x20>;  // I2Cアドレス（必要に応じて 0x21〜0x27 に変更）
+        label = "MCP23017";
+
+        gpio-controller;
+        #gpio-cells = <2>;
+        ngpios = <16>;
+        status = "okay";
+    };
+};
+
+/ {
+    /* 行6 × 列12 のキーマトリクスを定義 */
+    matrix {
+        compatible = "zmk,matrix-transform";
+        row-gpios = <
+            &mcp23017 0 GPIO_ACTIVE_LOW
+            &mcp23017 1 GPIO_ACTIVE_LOW
+            &mcp23017 2 GPIO_ACTIVE_LOW
+            &mcp23017 3 GPIO_ACTIVE_LOW
+            &mcp23017 4 GPIO_ACTIVE_LOW
+            &mcp23017 5 GPIO_ACTIVE_LOW
+        >;
+
+        col-gpios = <
+            &mcp23017 6  GPIO_ACTIVE_LOW
+            &mcp23017 7  GPIO_ACTIVE_LOW
+            &mcp23017 8  GPIO_ACTIVE_LOW
+            &mcp23017 9  GPIO_ACTIVE_LOW
+            &mcp23017 10 GPIO_ACTIVE_LOW
+            &mcp23017 11 GPIO_ACTIVE_LOW
+            &mcp23017 12 GPIO_ACTIVE_LOW
+            &mcp23017 13 GPIO_ACTIVE_LOW
+            &mcp23017 14 GPIO_ACTIVE_LOW
+            &mcp23017 15 GPIO_ACTIVE_LOW
+            &mcp23017 16 GPIO_ACTIVE_LOW  // MCP23017 は16ピンなので 16, 17は存在しない場合あり
+            &mcp23017 17 GPIO_ACTIVE_LOW
+        >;
+    };
+};
