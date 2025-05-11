@@ -47,5 +47,11 @@ PIN_MACRO(pin10, <&kp N1 &kp N0>)
         encoder1 {
             bindings = < &scroll_down &scroll_up >;
         };
+        gpio_keys {
+            bindings = <
+                &kp ENTER      // encoder0 のスイッチ
+                &mo 1          // encoder1 のスイッチ（例: Layer 1 に切り替え）
+            >;
+        };
     };
 };
