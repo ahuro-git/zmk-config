@@ -11,6 +11,41 @@
         status = "okay";
     };
 };
+&gpio0 {
+    encoder0_a: encoder0_a {
+        gpios = <10 GPIO_ACTIVE_LOW>;
+        label = "ENC0_A";
+    };
+    encoder0_b: encoder0_b {
+        gpios = <11 GPIO_ACTIVE_LOW>;
+        label = "ENC0_B";
+    };
+    encoder1_a: encoder1_a {
+        gpios = <12 GPIO_ACTIVE_LOW>;
+        label = "ENC1_A";
+    };
+    encoder1_b: encoder1_b {
+        gpios = <13 GPIO_ACTIVE_LOW>;
+        label = "ENC1_B";
+    };
+};
+
+&zmk_encoder0 {
+    compatible = "zmk,behavior-encoder";
+    label = "ENCODER_0";
+    a-gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+    b-gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
+    encoding = "normal";
+};
+
+&zmk_encoder1 {
+    compatible = "zmk,behavior-encoder";
+    label = "ENCODER_1";
+    a-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
+    b-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
+    encoding = "normal";
+};
+
 
 / {
     /* 行6 × 列12 のキーマトリクスを定義 */
