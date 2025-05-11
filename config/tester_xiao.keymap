@@ -40,5 +40,12 @@ PIN_MACRO(pin10, <&kp N1 &kp N0>)
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
             >;
         };
+        encoder0 {
+            bindings = < &inc_volume &dec_volume >;
+        };
+
+        encoder1 {
+            bindings = < &scroll_down &scroll_up >;
+        };
     };
 };
