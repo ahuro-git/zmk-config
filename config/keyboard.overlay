@@ -11,6 +11,7 @@
         status = "okay";
     };
 };
+/* GPIO ポート0 にエンコーダー関連ピンを割り当て */
 &gpio0 {
     encoder0_a: encoder0_a {
         gpios = <10 GPIO_ACTIVE_LOW>;
@@ -20,6 +21,11 @@
         gpios = <11 GPIO_ACTIVE_LOW>;
         label = "ENC0_B";
     };
+    encoder0_btn: encoder0_btn {
+        gpios = <14 GPIO_ACTIVE_LOW>;
+        label = "ENC0_BTN";
+    };
+
     encoder1_a: encoder1_a {
         gpios = <12 GPIO_ACTIVE_LOW>;
         label = "ENC1_A";
@@ -27,6 +33,10 @@
     encoder1_b: encoder1_b {
         gpios = <13 GPIO_ACTIVE_LOW>;
         label = "ENC1_B";
+    };
+    encoder1_btn: encoder1_btn {
+        gpios = <15 GPIO_ACTIVE_LOW>;
+        label = "ENC1_BTN";
     };
 };
 
@@ -44,6 +54,13 @@
     a-gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
     b-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
     encoding = "normal";
+};
+
+&zmk_input {
+    bindings = <
+        &gpio0 14 GPIO_ACTIVE_LOW
+        &gpio0 15 GPIO_ACTIVE_LOW
+    >;
 };
 
 
