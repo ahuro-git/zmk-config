@@ -82,6 +82,52 @@
         enc_right: enc_right {
             bindings = <&kp RIGHT>; // 右移動
         };
+
+        // エンコーダーの回転動作とレイヤーのマッピング
+    // ==========================================================
+    layers {
+        // Layer 0 (デフォルトレイヤー)
+        default_layer {
+            // ... キーボードのキーマップ定義 (bindings) ...
+
+            encoder-map = <
+                // エンコーダー 0 (overlayファイルで定義した最初のエンコーダー)
+                // 時計回りアクション   反時計回りアクション
+                &enc_vol_up             &enc_vol_down
+
+                // エンコーダー 1 (overlayファイルで定義した2番目のエンコーダー)
+                // 時計回りアクション   反時計回りアクション
+                &enc_right              &enc_left
+            >;
+        };
+
+        // Layer 1 (Fnキーなどで切り替えるレイヤー)
+        layer_1 {
+            // ... Layer 1 のキーマップ定義 (bindings) ...
+
+            encoder-map = <
+                // エンコーダー 0 (Layer 1 ではスクロールに割り当てる)
+                &enc_scroll_up          &enc_scroll_down
+
+                // エンコーダー 1 (Layer 1 ではメディアトラック変更に割り当てる)
+                &enc_next_track         &enc_prev_track
+            >;
+        };
+
+        // Layer 2 (別の機能レイヤー)
+        layer_2 {
+            // ... Layer 2 のキーマップ定義 (bindings) ...
+
+            encoder-map = <
+                // エンコーダー 0 (Layer 2 ではカーソル上下に割り当てる)
+                &kp UP                  &kp DOWN
+
+                // エンコーダー 1 (Layer 2 では別の音量調整)
+                &enc_vol_up             &enc_vol_down
+            >;
+        };
+        // ... 他のレイヤーも同様に設定 ...
+    }; // end of layers
         
     };
 };
