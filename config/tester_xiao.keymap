@@ -1,56 +1,47 @@
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
+// my_6x12_ioe.keymap
 
-#define PIN_MACRO(name, pin) \
-/ { \
-    macros { \
-        name: name { \
-            compatible = "zmk,behavior-macro"; \
-            wait-ms = <5>; \
-            tap-ms = <5>; \
-            #binding-cells = <0>; \
-            bindings = <&kp P &kp I &kp N &kp SPACE>, pin, <&kp ENTER>; \
-        }; \
-    }; \
-};
-
-PIN_MACRO(pin0, <&kp N0>)
-PIN_MACRO(pin1, <&kp N1>)
-PIN_MACRO(pin2, <&kp N2>)
-PIN_MACRO(pin3, <&kp N3>)
-PIN_MACRO(pin4, <&kp N4>)
-PIN_MACRO(pin5, <&kp N5>)
-PIN_MACRO(pin6, <&kp N6>)
-PIN_MACRO(pin7, <&kp N7>)
-PIN_MACRO(pin8, <&kp N8>)
-PIN_MACRO(pin9, <&kp N9>)
-PIN_MACRO(pin10, <&kp N1 &kp N0>)
+#include <dt-bindings/zmk/keys.h> // キーコードの定義
+#include <dt-bindings/zmk/behaviors.h> // レイヤー切り替えなどの動作
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
+            // ベースレイヤー (Layer 0)
             bindings = <
-                &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp LBKT &kp RBKT
-                &kp A &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp SEMI &kp SQT &kp ENTER
-                &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT &kp SLASH &kp MINUS &kp EQUAL
-                &kp ESC &kp TAB &kp LCTRL &kp LSHIFT &kp SPACE &kp BSPC &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+                &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P   &kp LBKT &kp RBKT // Row 0
+                &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SEMI &kp SQT  &kp ENTER // Row 1
+                &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA &kp DOT &kp SLASH &kp UP  &kp ESC // Row 2
+                &kp LCTRL &kp LGUI &kp LALT &mo 1 &kp SPACE &kp SPACE &kp SPACE &kp SPACE &mo 2 &kp RALT &kp RGUI &kp RCTRL // Row 3 (Spacebar や Modifiers)
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4 (もしあれば)
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5 (もしあれば)
             >;
         };
-        encoder0 {
-            bindings = < &inc_volume &dec_volume >;
+
+        layer_1 {
+            // レイヤー 1 (モディファイア、記号など)
+            // default_layer の &mo 1 で切り替わる
+            bindings = <
+                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS &kp EQUAL // Row 0
+                &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &kp BSLH &kp PIPE // Row 1
+                &kp GRAVE &kp TILDE &kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LBRC &kp RBRC &kp LCBR &kp RCBR &kp LT &kp GT &kp BSPC &kp DEL // Row 2
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 3
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5
+            >;
         };
 
-        encoder1 {
-            bindings = < &scroll_down &scroll_up >;
-        };
-        gpio_keys {
+        layer_2 {
+            // レイヤー 2 (ファンクションキー、メディアキーなど)
+            // default_layer の &mo 2 で切り替わる
             bindings = <
-                &kp ENTER      // encoder0 のスイッチ
-                &mo 1          // encoder1 のスイッチ（例: Layer 1 に切り替え）
+                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 // Row 0
+                &kp PSCRN &kp SCRLCK &kp PAUSE_BREAK &kp K_APP &kp INSERT &kp HOME &kp PG_UP &kp END &kp PG_DN &kp K_VOLUME_UP &kp K_VOLUME_DOWN &kp K_MUTE // Row 1
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 2
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 3
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5
             >;
         };
     };
