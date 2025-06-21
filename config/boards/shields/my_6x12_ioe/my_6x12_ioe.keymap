@@ -46,5 +46,42 @@
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5
             >;
         };
+
+         // 例1: 音量調整
+        enc_vol_down: enc_vol_down {
+            bindings = <&kp K_VOL_DN>; // 音量ダウン
+        };
+
+        enc_vol_up: enc_vol_up {
+            bindings = <&kp K_VOL_UP>; // 音量アップ
+        };
+
+        // 例2: スクロール
+        enc_scroll_down: enc_scroll_down {
+            bindings = <&kp PG_DN>; // ページダウン (下スクロール)
+        };
+
+        enc_scroll_up: enc_scroll_up {
+            bindings = <&kp PG_UP>; // ページアップ (上スクロール)
+        };
+
+        // 例3: メディアトラック変更 (Spotify, YouTube など)
+        enc_next_track: enc_next_track {
+            bindings = <&kp C_NEXT>; // 次のトラック
+        };
+
+        enc_prev_track: enc_prev_track {
+            bindings = <&kp C_PREV>; // 前のトラック
+        };
+
+        // 例4: カーソル移動 (左右)
+        enc_left: enc_left {
+            bindings = <&kp LEFT>; // 左移動
+        };
+
+        enc_right: enc_right {
+            bindings = <&kp RIGHT>; // 右移動
+        };
+        
     };
 };
