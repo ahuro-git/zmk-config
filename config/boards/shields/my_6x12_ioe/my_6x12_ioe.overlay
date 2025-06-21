@@ -44,33 +44,30 @@
         
         // 行ピン (6行)
         row-gpios = <
-            &i2c0_ioe 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB0
-            &i2c0_ioe 9  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB1
-            &i2c0_ioe 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB2
-            &i2c0_ioe 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB3
-            &i2c0_ioe 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB4
-            &i2c0_ioe 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB5
+            &i2c0_ioe 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // 1
+            &i2c0_ioe 7  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) //  6
+            &gpio0 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)    //5        
+            &gpio0 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)//2
+            &gpio0 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)//4
+            &gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)//3
         >;
 
         // 列ピン (12列)
-        // IOエキスパンダのGPA0-7 (8本) とGPB6-7 (2本) を使い、残りの2本はマイコンのGPIOを使う場合など
-        // あるいは、複数のIOエキスパンダを使う場合も考えられます。
-        // ここでは、IOエキスパンダのGPA0-7とGPB6-7で合計10列、残りの2列はマイコンのピンで賄う例
         col-gpios = <
-            &i2c0_ioe 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA0
-            &i2c0_ioe 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA1
-            &i2c0_ioe 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA2
-            &i2c0_ioe 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA3
-            &i2c0_ioe 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA4
-            &i2c0_ioe 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA5
-            &i2c0_ioe 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA6
-            &i2c0_ioe 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA7
-            &i2c0_ioe 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPB6
-            &i2c0_ioe 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPB7
-            // 残りの2列はマイコンのピンを使用（例：P0.03, P0.04）
+            &i2c0_ioe 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 7
+            &i2c0_ioe 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 8
+            &i2c0_ioe 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 9
+            &i2c0_ioe 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 10
+            &i2c0_ioe 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 11
+            &i2c0_ioe 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 12
+            &i2c0_ioe 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 1
+            &i2c0_ioe 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 2
+            &i2c0_ioe 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 3
+            &i2c0_ioe 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 4
+            &i2c0_ioe 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 5
+            &i2c0_ioe 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // 6
             // 使用するボードのGPIOピンに合わせて &gpio0 3, &gpio0 4 のように記述
-            // &gpio0 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
-            // &gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
+            
         >;
     };
 
@@ -84,8 +81,8 @@
                 status = "okay";
                 label = "Encoder 1";
                 
-                a-gpios = <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-                b-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+                a-gpios = <&gpio0 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+                b-gpios = <&gpio0 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     
                 steps-per-rotation = <24>; // エンコーダーの1回転あたりのクリック数 (使用するエンコーダーによる)
                 // resolution = <4>; // オプション: エンコーダーの分解能。一般的には steps-per-rotation を使う。
@@ -104,8 +101,8 @@
                 status = "okay";
                 label = "Encoder 2";
                 // 別のピンを指定。例: P0.03 と P0.04
-                a-gpios = <&gpio0 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-                b-gpios = <&gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+                a-gpios = <&gpio0 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+                b-gpios = <&gpio0 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     
                 steps-per-rotation = <24>;
                 actions = <
