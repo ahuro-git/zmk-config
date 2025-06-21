@@ -10,12 +10,14 @@
         default_layer {
             // ベースレイヤー (Layer 0)
             bindings = <
-                &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P   &kp LBKT &kp RBKT // Row 0
-                &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SEMI &kp SQT  &kp ENTER // Row 1
-                &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA &kp DOT &kp SLASH &kp UP  &kp ESC // Row 2
-                &kp LCTRL &kp LGUI &kp LALT &mo 1 &kp SPACE &kp SPACE &kp SPACE &kp SPACE &mo 2 &kp RALT &kp RGUI &kp RCTRL // Row 3 (Spacebar や Modifiers)
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4 (もしあれば)
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5 (もしあれば)
+                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 // Row 0
+                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS &kp EQUAL  1
+                &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P   &kp LBKT &kp RBKT // Row 2
+                &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SEMI &kp SQT  &kp ENTER // Row 3
+                &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA &kp DOT &kp SLASH &kp UP  &kp ESC // Row 4
+                &kp LCTRL &kp LGUI &kp LALT &mo 1 &kp SPACE &kp SPACE &kp SPACE &kp SPACE &mo 2 &kp RALT &kp RGUI &kp RCTRL // Row 5
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 6
+
             >;
         };
 
