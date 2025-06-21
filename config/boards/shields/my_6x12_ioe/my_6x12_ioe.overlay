@@ -1,0 +1,101 @@
+// my_6x12_ioe.overlay
+
+#include <dt-bindings/zmk/matrix.h>
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/gpio/gpio.h> // GPIO_ACTIVE_HIGH, GPIO_PULL_UP など
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,matrix-transform = &default_transform;
+    };
+
+    // IOエキスパンダのI2Cアドレス (通常は0x20-0x27)
+    // 実際のアドレスに合わせて変更してください
+    i2c0_ioe: mcp23018@20 {
+        compatible = "microchip,mcp23018";
+        reg = <0x20>; // I2Cアドレス
+        gpio-controller;
+        #gpio-cells = <2>; // pin, flags
+
+        // IOエキスパンダのピンをZMKのキーマトリックスに割り当てる
+        // GPB0-7, GPA0-7 が利用可能
+        // マトリックスの行数、列数に合わせて調整してください
+        // この例では、IOエキスパンダで全ての行または列を制御すると仮定しています。
+        // 実際にはマイコンのピンとIOエキスパンダのピンを組み合わせて使うことが多いです。
+        status = "okay";
+    };
+
+    kscan0: kscan {
+        // I2C経由でIOエキスパンダに接続されたマトリックススキャン
+        // 6行12列のマトリックスを想定
+        compatible = "zmk,kscan-gpio-matrix";
+        // マイコンのI2Cバスに接続
+        // 使用するマイコンのI2Cピンに合わせて変更してください
+        // 例: &pro_micro_i2c (Pro Micro), &i2c0 (Nice!Nanoなど)
+        // ここでは、Nice!NanoなどのI2C0バスにIOエキスパンダが接続されていると仮定
+        // また、MCP23018のGPIOピンを直接指定します。
+
+        // 以下は MCP23018 の GPB0-5 を行、GPA0-7 と GPIOB6-7 を列として使う場合の例
+        // 実際にはキーボードの配線に合わせて変更してください。
+        // IOエキスパンダのピンは `&<io_expander_node_name> <pin_number> <flags>` で指定
+        // pin_number: 0-7 (GPA0-7), 8-15 (GPB0-7)
+        // flags: GPIO_ACTIVE_HIGH | GPIO_PULL_UP など
+        
+        // 行ピン (6行)
+        row-gpios = <
+            &i2c0_ioe 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB0
+            &i2c0_ioe 9  (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB1
+            &i2c0_ioe 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB2
+            &i2c0_ioe 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB3
+            &i2c0_ioe 12 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB4
+            &i2c0_ioe 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP) // GPB5
+        >;
+
+        // 列ピン (12列)
+        // IOエキスパンダのGPA0-7 (8本) とGPB6-7 (2本) を使い、残りの2本はマイコンのGPIOを使う場合など
+        // あるいは、複数のIOエキスパンダを使う場合も考えられます。
+        // ここでは、IOエキスパンダのGPA0-7とGPB6-7で合計10列、残りの2列はマイコンのピンで賄う例
+        col-gpios = <
+            &i2c0_ioe 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA0
+            &i2c0_ioe 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA1
+            &i2c0_ioe 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA2
+            &i2c0_ioe 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA3
+            &i2c0_ioe 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA4
+            &i2c0_ioe 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA5
+            &i2c0_ioe 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA6
+            &i2c0_ioe 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPA7
+            &i2c0_ioe 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPB6
+            &i2c0_ioe 15 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN) // GPB7
+            // 残りの2列はマイコンのピンを使用（例：P0.03, P0.04）
+            // 使用するボードのGPIOピンに合わせて &gpio0 3, &gpio0 4 のように記述
+            // &gpio0 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
+            // &gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
+        >;
+    };
+
+    default_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        rows = <6>;
+        columns = <12>; // 6行12列
+
+        // 各キーの物理的な位置をキーマトリックスの(行, 列)にマッピングします。
+        // RC(row, col) の形式で指定します。
+        // キーマップファイルのキーの並び順と一致させる必要があります。
+        // 12キー x 6行 = 72キー分のRC()エントリが必要です。
+        map = <
+            // Row 0
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) RC(0,5) RC(0,6) RC(0,7) RC(0,8) RC(0,9) RC(0,10) RC(0,11)
+            // Row 1
+            RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) RC(1,5) RC(1,6) RC(1,7) RC(1,8) RC(1,9) RC(1,10) RC(1,11)
+            // Row 2
+            RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10) RC(2,11)
+            // Row 3
+            RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(3,6) RC(3,7) RC(3,8) RC(3,9) RC(3,10) RC(3,11)
+            // Row 4
+            RC(4,0) RC(4,1) RC(4,2) RC(4,3) RC(4,4) RC(4,5) RC(4,6) RC(4,7) RC(4,8) RC(4,9) RC(4,10) RC(4,11)
+            // Row 5
+            RC(5,0) RC(5,1) RC(5,2) RC(5,3) RC(5,4) RC(5,5) RC(5,6) RC(5,7) RC(5,8) RC(5,9) RC(5,10) RC(5,11)
+        >;
+    };
+};
