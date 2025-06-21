@@ -1,7 +1,5 @@
-// my_6x12_ioe.keymap
-
-#include <dt-bindings/zmk/keys.h> // キーコードの定義
-#include <dt-bindings/zmk/behaviors.h> // レイヤー切り替えなどの動作
+#include <dt-bindings/zmk/keys.h>        // キーコードの定義
+#include <dt-bindings/zmk/behaviors.h>   // レイヤー切り替えなどの動作
 
 / {
     keymap {
@@ -9,15 +7,14 @@
 
         default_layer {
             // ベースレイヤー (Layer 0)
+            // 6行12列のキーマップを想定。実際の物理キーボードに合わせて調整してください。
             bindings = <
-                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 // Row 0
-                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS &kp EQUAL  1
-                &kp Q   &kp W   &kp E   &kp R   &kp T   &kp Y   &kp U   &kp I   &kp O   &kp P   &kp LBKT &kp RBKT // Row 2
-                &kp A   &kp S   &kp D   &kp F   &kp G   &kp H   &kp J   &kp K   &kp L   &kp SEMI &kp SQT  &kp ENTER // Row 3
-                &kp Z   &kp X   &kp C   &kp V   &kp B   &kp N   &kp M   &kp COMMA &kp DOT &kp SLASH &kp UP  &kp ESC // Row 4
-                &kp LCTRL &kp LGUI &kp LALT &mo 1 &kp SPACE &kp SPACE &kp SPACE &kp SPACE &mo 2 &kp RALT &kp RGUI &kp RCTRL // Row 5
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 6
-
+                &kp F1      &kp F2      &kp F3      &kp F4      &kp F5      &kp F6      &kp F7      &kp F8      &kp F9      &kp F10     &kp F11     &kp F12     // Row 0
+                &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &kp MINUS   &kp EQUAL   // Row 1
+                &kp Q       &kp W       &kp E       &kp R       &kp T       &kp Y       &kp U       &kp I       &kp O       &kp P       &kp LBKT    &kp RBKT    // Row 2
+                &kp A       &kp S       &kp D       &kp F       &kp G       &kp H       &kp J       &kp K       &kp L       &kp SEMI    &kp SQT     &kp ENTER   // Row 3
+                &kp Z       &kp X       &kp C       &kp V       &kp B       &kp N       &kp M       &kp COMMA   &kp DOT     &kp SLASH   &kp UP      &kp ESC     // Row 4
+                &kp LCTRL   &kp LGUI    &kp LALT    &mo 1       &kp SPACE   &kp SPACE   &kp SPACE   &kp SPACE   &mo 2       &kp RALT    &kp RGUI    &kp RCTRL   // Row 5
             >;
         };
 
@@ -25,12 +22,12 @@
             // レイヤー 1 (モディファイア、記号など)
             // default_layer の &mo 1 で切り替わる
             bindings = <
-                &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &kp MINUS &kp EQUAL // Row 0
-                &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT &kp CARET &kp AMPS &kp ASTRK &kp LPAR &kp RPAR &kp BSLH &kp PIPE // Row 1
-                &kp GRAVE &kp TILDE &kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LBRC &kp RBRC &kp LCBR &kp RCBR &kp LT &kp GT &kp BSPC &kp DEL // Row 2
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 3
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 0 (Fキー部分は透過)
+                &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT   &kp CARET   &kp AMPS    &kp ASTRK   &kp LPAR    &kp RPAR    &kp BSLH    &kp PIPE    // Row 1
+                &kp GRAVE   &kp TILDE   &kp LEFT_BRACKET &kp RIGHT_BRACKET &kp LBRC    &kp RBRC    &kp LCBR    &kp RCBR    &kp LT      &kp GT      &kp BSPC    &kp DEL     // Row 2
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 3
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 4
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 5
             >;
         };
 
@@ -38,16 +35,21 @@
             // レイヤー 2 (ファンクションキー、メディアキーなど)
             // default_layer の &mo 2 で切り替わる
             bindings = <
-                &kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11 &kp F12 // Row 0
-                &kp PSCRN &kp SCRLCK &kp PAUSE_BREAK &kp K_APP &kp INSERT &kp HOME &kp PG_UP &kp END &kp PG_DN &kp K_VOLUME_UP &kp K_VOLUME_DOWN &kp K_MUTE // Row 1
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 2
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 3
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 4
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans // Row 5
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 0 (Fキー部分は透過)
+                &kp PSCRN   &kp SCRLCK  &kp PAUSE_BREAK &kp K_APP   &kp INSERT  &kp HOME    &kp PG_UP   &kp END     &kp PG_DN   &kp K_VOLUME_UP &kp K_VOLUME_DOWN &kp K_MUTE // Row 1
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 2
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 3
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 4
+                &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans      // Row 5
             >;
         };
+    }; // end of keymap
 
-         // 例1: 音量調整
+    // ---
+    // エンコーダーのアクション定義は behaviors ノードの中に配置します。
+    // このノードは / の直下に置きます。
+    behaviors {
+        // 例1: 音量調整
         enc_vol_down: enc_vol_down {
             bindings = <&kp K_VOL_DN>; // 音量ダウン
         };
@@ -83,13 +85,19 @@
             bindings = <&kp RIGHT>; // 右移動
         };
 
-        // エンコーダーの回転動作とレイヤーのマッピング
-    // ==========================================================
-    layers {
-        // Layer 0 
-        default_layer {
-            // ... キーボードのキーマップ定義 (bindings) ...
+        // ここにエンコーダーのクリック動作があれば定義します（オプション）
+        // 例: エンコーダー1のクリックでミュート
+        enc_1_mute: enc_1_mute {
+            bindings = <&kp K_MUTE>;
+        };
+    }; // end of behaviors
 
+    // ---
+    // エンコーダーの回転動作とレイヤーのマッピングは layers ノードの中に配置します。
+    // このノードも / の直下に置きます。
+    layers {
+        // Layer 0 (デフォルトレイヤー)
+        default_layer {
             encoder-map = <
                 // エンコーダー 0 (overlayファイルで定義した最初のエンコーダー)
                 // 時計回りアクション   反時計回りアクション
@@ -101,10 +109,8 @@
             >;
         };
 
-        // Layer 1 
+        // Layer 1 (モディファイア、記号など)
         layer_1 {
-            // ... Layer 1 のキーマップ定義 (bindings) ...
-
             encoder-map = <
                 // エンコーダー 0 (Layer 1 ではスクロールに割り当てる)
                 &enc_scroll_up          &enc_scroll_down
@@ -114,10 +120,8 @@
             >;
         };
 
-        // Layer 2 
+        // Layer 2 (ファンクションキー、メディアキーなど)
         layer_2 {
-            // ... Layer 2 のキーマップ定義 (bindings) ...
-
             encoder-map = <
                 // エンコーダー 0 (Layer 2 ではカーソル上下に割り当てる)
                 &kp UP                  &kp DOWN
@@ -126,8 +130,6 @@
                 &enc_vol_up             &enc_vol_down
             >;
         };
-        // ... 他のレイヤーも同様
+        // ... 他のレイヤーも同様に定義 ...
     }; // end of layers
-        
-    };
-};
+}; // end of /
