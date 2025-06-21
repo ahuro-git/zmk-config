@@ -73,9 +73,7 @@
             // &gpio0 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)
         >;
     };
-    / {
-        // ... 既存の kscan0 (キーマトリックス) の定義 ...
-    
+
         encoders {
             compatible = "zmk,encoders";
             #address-cells = <1>;
@@ -85,10 +83,7 @@
             encoder_1: encoder@0 {
                 status = "okay";
                 label = "Encoder 1";
-                // A相とB相のピンを指定。使用するマイコンのGPIOピンに合わせて変更してください。
-                // 例: &gpio0 20 (P0.20), &gpio0 22 (P0.22)
-                // ZMKのドキュメントやボードのピン配置図で確認してください。
-                // ここでは Nice!Nano v2 の P0.20 と P0.22 を例にしています。
+                
                 a-gpios = <&gpio0 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
                 b-gpios = <&gpio0 22 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     
@@ -104,7 +99,7 @@
                 >;
             };
     
-            // エンコーダー 2 の定義
+            // エンコーダー 2
             encoder_2: encoder@1 {
                 status = "okay";
                 label = "Encoder 2";
@@ -118,14 +113,7 @@
                     &encoder_default_cw
                 >;
             };
-        };
-    
-        // エンコーダーのアクション定義（通常はファイルのどこかにまとめて定義します）
-        // actions ノードはキーマップファイルと同じ階層に置かれることが多いですが、
-        // 必要に応じてオーバーレイファイルに含めることもできます。
-        // キーマップファイルで定義するのが一般的です。
-        // 後述のキーマップファイルのセクションを参照してください。
-    };
+        };    
 
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
