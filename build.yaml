@@ -18,7 +18,7 @@
 #     artifact-name: corne_left_with_studio
 #
 ---
-include:
+#include:
 boards:
   - seeeduino_xiao_ble # ここにボード名があるか確認
   # - nice_nano_v2     # もし別のボードもビルドするなら追加
