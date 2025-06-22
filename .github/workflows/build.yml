@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
@@ -32,7 +32,7 @@ jobs:
         run: |
           west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=my_6x12_ioe
       - name: Upload firmware artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: firmware
           path: build/zephyr/zephyr.hex
