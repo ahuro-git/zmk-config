@@ -1,0 +1,3 @@
+config SHIELD_MY_6X12_IOE
+    bool "my_6x12_ioe"
+    default y
