@@ -1,0 +1,13 @@
+&i2c0 {
+    status = "okay";
+    
+    mcp23018@20 {
+        compatible = "microchip,mcp23017";
+        reg = <0x20>;               // I2Cアドレス（例）
+        gpio-controller;
+        #gpio-cells = <2>;
+        interrupt-parent = <&gpio0>;   // 割り込み用GPIO（ボードによる）
+        interrupts = <15 IRQ_TYPE_LEVEL_LOW>;  // 割り込み番号・タイプ
+        status = "okay";
+    };
+};
