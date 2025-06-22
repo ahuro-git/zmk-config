@@ -1,0 +1,12 @@
+# .github/workflows/build.yml または類似のファイル
+
+name: Build ZMK firmware
+
+on:
+  push:
+    branches:
+      - main # mainブランチへのプッシュで自動ビルド
+  pull_request:
+    branches:
+      - main # プルリクエストで自動ビルド
+  workflow_dispatch: # これが重要！この行があるか確認してください。
