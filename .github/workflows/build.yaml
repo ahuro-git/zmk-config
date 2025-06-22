@@ -9,4 +9,4 @@ on:
   pull_request:
     branches:
       - main # プルリクエストで自動ビルド
-  workflow_dispatch: # これが重要！この行があるか確認してください。
+  workflow_dispatch: 
