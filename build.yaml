@@ -19,5 +19,9 @@
 #
 ---
 include:
-  - boards: seeeduino_xiao_ble
-    shields: my_6x12_ioe
+boards:
+  - seeeduino_xiao_ble # ここにボード名があるか確認
+  # - nice_nano_v2     # もし別のボードもビルドするなら追加
+
+shields:
+  - my_6x12_ioe
