@@ -23,11 +23,11 @@ jobs:
       - name: Setup west and Zephyr SDK
         run: |
           pip3 install --user west
-          west init -l app
+          west init -l config
           west update
           west zephyr-export
           pip3 install --user -r zephyr/scripts/requirements.txt
 
       - name: Build firmware
         run: |
-          west build -s app -b seeeduino_xiao_ble -- -DSHIELD=my_6x12_ioe
+          west build -s zmk/app -b seeeduino_xiao_ble -- -DSHIELD=my_6x12_ioe
