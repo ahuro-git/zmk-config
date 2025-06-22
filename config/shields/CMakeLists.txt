@@ -1,0 +1,3 @@
+zephyr_library_named(shield_my_6x12_ioe)
+
+zephyr_library_sources_ifdef(CONFIG_SHIELD_MY_6X12_IOE my_6x12_ioe.overlay)
