@@ -19,5 +19,5 @@
 #
 ---
 include:
-  - board: seeeduino_xiao_ble
-    shield: my_6x12_ioe
+  - boards: seeeduino_xiao_ble
+    shields: my_6x12_ioe
