@@ -1,3 +1,9 @@
+menu "Shields"
+
 config SHIELD_MY_6X12_IOE
-    bool "my_6x12_ioe"
-    default y
+    bool "Enable my_6x12_ioe shield"
+    default n
+    help
+      Enable support for the my_6x12_ioe shield.
+
+endmenu
